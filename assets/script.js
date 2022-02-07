@@ -3,7 +3,7 @@ var issueContainer = document.getElementById('issues');
 var fetchButton = document.getElementById('fetch-button');
 var APIKey = "186df4cc5a59136cead083a7ffe439e3";
 var limit = "5";
-var queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + searchItem + "&limit=" + limit + "&appid=" + APIKey;
+var queryURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + text.value + "&limit=" + limit + "&appid=" + APIKey;
 
 function getApi() {
     fetch(queryURL)
@@ -63,7 +63,7 @@ searchButton.addEventListener("click", function(event) {
 
   var inputText = text.value.trim();
   searchItem.push(inputText);
-  text.value = "";
+  //text.value = "";
 
   saveSearch();
   renderSearch();
