@@ -38,7 +38,7 @@ function saveSearch() {
 function renderSearch() {
     searchDisplay.innerHTML = "";
     for (var i = 0; i < searchItem.length; i++) {
-        var searchArray = searchItem[i];
+        var searchArray = searchItem[i] + "  ";
         var li = document.createElement("li");
 
         li.textContent = searchArray;
@@ -81,6 +81,13 @@ searchDisplay.addEventListener("click", function(event) {
     renderSearch();
     }
 });
+
+//Creates a reset button to refresh the data and start over
+var resetButton = document.getElementById("reset-button");
+function rButton() {
+    rButton = location.reload();
+}
+resetButton.addEventListener("click", rButton, false);
 
 //Function that runs on page load to maintain previous search history
 function init() {
