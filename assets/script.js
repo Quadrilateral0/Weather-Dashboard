@@ -1,11 +1,12 @@
 //OpenWeather API
-//var issueContainer = document.getElementById('issues');
-//var fetchButton = document.getElementById('fetch-button');
+var issueContainer = document.getElementById('issues');
+var fetchButton = document.getElementById('fetch-button');
+var APIKey = "186df4cc5a59136cead083a7ffe439e3";
+var limit = "5";
+var queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + searchItem + "&limit=" + limit + "&appid=" + APIKey;
 
-//function getApi() {
-  //var requestUrl = "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={186df4cc5a59136cead083a7ffe439e3}";
-
-  //fetch(requestUrl)
+function getApi() {
+    fetch(queryURL)
   //  .then(function (response) {
   //    return response.json();
   //  })
@@ -20,7 +21,7 @@
   //      issueContainer.append(issueTitle);
    //   }
   //  });
-//}
+}
 //fetchButton.addEventListener('click', getApi);
 
 ////Save search location in local storage and display in sidebar
@@ -52,10 +53,9 @@ function renderSearch() {
         }
 };
 
-//Save input to local storage array using search bar submit button
+//Save input to local storage array, render search to page, and trigger API call using search bar submit button
 searchButton.addEventListener("click", function(event) {
   event.preventDefault();
-  console.log(text);
 
   if (text === ""){
       return;
@@ -67,6 +67,7 @@ searchButton.addEventListener("click", function(event) {
 
   saveSearch();
   renderSearch();
+  getApi();
 });
 
 // Add click remove event to saved search history
