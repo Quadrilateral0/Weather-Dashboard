@@ -45,7 +45,7 @@ function renderSearch() {
         li.setAttribute("search-index", i);
 
         var remove = document.createElement("button");
-        remove.textContent = "Remove";
+        remove.textContent = "X";
 
         li.appendChild(remove);
         searchDisplay.appendChild(li);
@@ -53,8 +53,9 @@ function renderSearch() {
 };
 
 //Save input to local storage array using search bar submit button
-searchButton.addEventListener("submit", function(event) {
+searchButton.addEventListener("click", function(event) {
   event.preventDefault();
+  console.log(text);
 
   if (text === ""){
       return;
