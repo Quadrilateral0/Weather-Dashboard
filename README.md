@@ -40,6 +40,7 @@ THEN I am again presented with current and future conditions for that city
 
 ## Credits
 A thanks to my resources:
+- [OpenWeather - One Call API](https://openweathermap.org/api/one-call-api)
 - [Screencastify - Chrome Extension](https://www.screencastify.com/?gclid=Cj0KCQiAgP6PBhDmARIsAPWMq6kirDwVSm0ryb7sQeSxVQuZG-G7kk9ikfSz77SBh-fA7QS9aKdyjgAaAgJGEALw_wcB)
 - [Visual Studio Code](https://code.visualstudio.com/download)
 
