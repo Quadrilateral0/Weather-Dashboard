@@ -1,34 +1,32 @@
 //OpenWeather API
-var issueContainer = document.getElementById('issues');
-var fetchButton = document.getElementById('fetch-button');
 var APIKey = "186df4cc5a59136cead083a7ffe439e3";
-var limit = "5";
-var queryURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + text.value + "&limit=" + limit + "&appid=" + APIKey;
-
-function getApi() {
-    fetch(queryURL)
-  //  .then(function (response) {
-  //    return response.json();
-  //  })
-  //  .then(function (data) {
- //     console.log(data);
-  //    for (var i = 0; i < data.length; i++) {
-  //      var userName = document.createElement('h3');
-  //      var issueTitle = document.createElement('p');
-  //      userName.textContent = data[i].user.login;
-  //      issueTitle.textContent = data[i].title;
-  //      issueContainer.append(userName);
-  //      issueContainer.append(issueTitle);
-   //   }
-  //  });
-}
-//fetchButton.addEventListener('click', getApi);
-
-////Save search location in local storage and display in sidebar
-var searchButton = document.getElementById("search-button");
+//var limit = "5";
 var text = document.getElementById("search-bar");
+var searchButton = document.getElementById("search-button");
 var searchDisplay = document.getElementById("search-append");
 var searchItem = [];
+
+function getApi() {
+    //var queryURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + text.value + "&limit=" + limit + "&appid=" + APIKey;
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?appid=" + APIKey + "&q=" + text.value;
+    fetch(queryURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      console.log(data.name);
+      for (var i = 0; i < data.length; i++) {
+        var searchLocation = document.createElement("h3");
+        var dataDisplay = document.getElementById("data-display");
+        //var searchData = document.createElement("p");
+        searchLocation.textContent = data[i].name;
+        //searchData.textContent = data[i].wind.speed;
+        dataDisplay.append(searchLocation);
+        //searchDisplay.append(searchData);
+      }
+    });
+}
 
 //Store search queries in the searchItem array in local storage
 function saveSearch() {
@@ -41,17 +39,20 @@ function renderSearch() {
     for (var i = 0; i < searchItem.length; i++) {
         var searchArray = searchItem[i] + "  ";
         var li = document.createElement("li");
+        var remove = document.createElement("button");
 
         li.textContent = searchArray;
+        remove.textContent = searchArray;
         li.setAttribute("search-index", i);
-
-        var remove = document.createElement("button");
-        remove.textContent = "X";
-
-        li.appendChild(remove);
-        searchDisplay.appendChild(li);
+        searchDisplay.appendChild(remove);
         }
 };
+
+//Dynamic update of current date and time
+function currentDay() {
+  document.getElementById("currentDay").innerHTML = moment().format("dddd, MMMM Do, YYYY");
+}
+setInterval(currentDay, 1000);
 
 //Save input to local storage array, render search to page, and trigger API call using search bar submit button
 searchButton.addEventListener("click", function(event) {

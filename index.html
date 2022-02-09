@@ -38,16 +38,19 @@
               
                   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                      <h1 class="h2">Dashboard</h1>
+                      <h1 class="h2" id="currentDay"></h1>
                       <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group mr-2">
                           <button type="button" class="btn btn-sm btn-outline-secondary" id="reset-button">Refresh</button>
+                            <div id="data-display">
+
+                            </div>
                         </div>
                       </div>
                     </div>
                     <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="823" height="347" style="display: block; height: 278px; width: 659px;"></canvas>
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                        <h2 class="h2">Dashboard</h2>
+                        <h2 class="h2">Five Day Forecast</h2>
                     </div>
                   </main>
                 </div>
@@ -55,6 +58,7 @@
         </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="assets/script.js"></script>
   </body>
 </html>
