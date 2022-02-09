@@ -7,26 +7,28 @@ var searchDisplay = document.getElementById("search-append");
 var searchItem = [];
 
 function getApi() {
-    //var queryURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + text.value + "&limit=" + limit + "&appid=" + APIKey;
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?appid=" + APIKey + "&q=" + text.value;
+    //var geoURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + text.value + "&limit=" + limit + "&appid=" + APIKey;
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?appid=" + APIKey + "&q=" + text.value + "&units=imperial";
     fetch(queryURL)
     .then(function (response) {
       return response.json();
     })
+
     .then(function (data) {
       console.log(data);
       console.log(data.name);
-      for (var i = 0; i < data.length; i++) {
+      console.log(data.main.temp);
+    
         var searchLocation = document.createElement("h3");
         var dataDisplay = document.getElementById("data-display");
+        searchLocation.textContent = data.name;
+        dataDisplay.appendChild(searchLocation);
+
         //var searchData = document.createElement("p");
-        searchLocation.textContent = data[i].name;
         //searchData.textContent = data[i].wind.speed;
-        dataDisplay.append(searchLocation);
         //searchDisplay.append(searchData);
-      }
-    });
-}
+    })
+};
 
 //Store search queries in the searchItem array in local storage
 function saveSearch() {
