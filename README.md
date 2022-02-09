@@ -1,4 +1,4 @@
-# Password Generator
+# Weather Dashboard
 ## Description
 For this project, I created a weather dashboard application. This application demonstrates my skills with JavaScript and server-side APIs. 
 
