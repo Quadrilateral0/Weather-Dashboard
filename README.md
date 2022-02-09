@@ -1,6 +1,6 @@
 # Password Generator
 ## Description
-For this project, I created a weather dashboard application. This application demonstrates my skills with javascript and server-side APIs. 
+For this project, I created a weather dashboard application. This application demonstrates my skills with JavaScript and server-side APIs. 
 
 ## Table of Contents
 - [Usage](#usage)
@@ -10,9 +10,9 @@ For this project, I created a weather dashboard application. This application de
 - [License](#license)
 
 ## Usage
-Visit my [Weather Dashboard here](https://quadrilateral0.github.io/Weather-Dashboard/). The following animation shows the web application's appearance and functionality:
+Visit my [Weather Dashboard here](https://quadrilateral0.github.io/Weather-Dashboard/). The following image shows the web application's appearance and functionality:
 
-![GIF Screenshot of Completed Website](assets/images/weather-dashboard-screenshot.gif)
+![Screenshot of Completed Website](assets/images/weather-dashboard-screenshot.png)
 
 ## User Story
 
