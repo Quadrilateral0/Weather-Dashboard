@@ -12,6 +12,7 @@ var forecastDate1 = document.createElement("p");
 var forecastMin1 = document.createElement("p");
 var forecastMax1 = document.createElement("p");
 var forecastAbout1 = document.createElement("p");
+var forecastIcon1 = document.createElement("pre");
 
 var forecastDisplay2 = document.querySelector("#forecast-display2");
 var forecastDisplay2Date = document.querySelector("#forecast-display2-date");
@@ -19,6 +20,7 @@ var forecastDate2 = document.createElement("p");
 var forecastMin2 = document.createElement("p");
 var forecastMax2 = document.createElement("p");
 var forecastAbout2 = document.createElement("p");
+var forecastIcon2 = document.createElement("pre");
 
 var forecastDisplay3 = document.querySelector("#forecast-display3");
 var forecastDisplay3Date = document.querySelector("#forecast-display3-date");
@@ -26,6 +28,7 @@ var forecastDate3 = document.createElement("p");
 var forecastMin3 = document.createElement("p");
 var forecastMax3 = document.createElement("p");
 var forecastAbout3 = document.createElement("p");
+var forecastIcon3 = document.createElement("pre");
 
 var forecastDisplay4 = document.querySelector("#forecast-display4");
 var forecastDisplay4Date = document.querySelector("#forecast-display4-date");
@@ -33,6 +36,7 @@ var forecastDate4 = document.createElement("p");
 var forecastMin4 = document.createElement("p");
 var forecastMax4 = document.createElement("p");
 var forecastAbout4 = document.createElement("p");
+var forecastIcon4 = document.createElement("pre");
 
 var forecastDisplay5 = document.querySelector("#forecast-display5");
 var forecastDisplay5Date = document.querySelector("#forecast-display5-date");
@@ -40,12 +44,14 @@ var forecastDate5 = document.createElement("p");
 var forecastMin5 = document.createElement("p");
 var forecastMax5 = document.createElement("p");
 var forecastAbout5 = document.createElement("p");
+var forecastIcon5 = document.createElement("pre");
 
 var searchLocation = document.createElement("h3");
 var windLocation = document.createElement("p");
 var tempLocation = document.createElement("p");
 var humLocation = document.createElement("p");
 var feelsLocation = document.createElement("p");
+var iconLocation = document.createElement("p");
 var searchItem = [];
 
 //Renders today's weather data according to search query
@@ -69,12 +75,14 @@ function getApi() {
       windLocation.textContent = "Current wind speed: " + data.wind.speed + " miles per hour";
       humLocation.textContent = "Current humidity: " + data.main.humidity + "%";
       feelsLocation.textContent = "Current temperature feels like: " + data.main.feels_like + "°F";
+      iconLocation.innerHTML = "<img src=http://openweathermap.org/img/w/" + data.weather[0].icon + ".png width='150'>";
 
       dataDisplay.append(searchLocation);
       dataDisplay.append(tempLocation);
       dataDisplay.append(feelsLocation);
       dataDisplay.append(windLocation);
       dataDisplay.append(humLocation);
+      dataDisplay.append(iconLocation);
 
       var lat = data.coord.lat;
       var lon = data.coord.lon;
@@ -110,48 +118,60 @@ function getForecastApi(lat, lon) {
         outcome.forecastResults.push(forecast);
       }
       console.log(outcome.forecastResults);
+      console.log(data.list[0].main.temp_max,data.list[0].main.temp_min);
+      //http://openweathermap.org/img/w/10d.png
       
+      forecastIcon1.innerHTML = "<img src=http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png width='90'>";
+      forecastDisplay1.append(forecastIcon1);
       forecastDate1.textContent = data.list[0].dt_txt;
       forecastDisplay1Date.append(forecastDate1);
-      forecastMin1.textContent = "Min temp: " + data.list[i].main.temp_min + "°F";
+      forecastMin1.textContent = "Min temp: " + data.list[0].main.temp_min + "°F";
       forecastDisplay1.append(forecastMin1);
-      forecastMax1.textContent = "Max temp: " + data.list[i].main.temp_max + "°F";
+      forecastMax1.textContent = "Max temp: " + data.list[0].main.temp_max + "°F";
       forecastDisplay1.append(forecastMax1);
       forecastAbout1.textContent = data.list[i].weather[0].description;
       forecastDisplay1.append(forecastAbout1);
 
+      forecastIcon2.innerHTML = "<img src=http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png width='90'>";
+      forecastDisplay2.append(forecastIcon2);
       forecastDate2.textContent = data.list[1].dt_txt;
       forecastDisplay2Date.append(forecastDate2);
-      forecastMin2.textContent = "Min temp: " + data.list[i].main.temp_min + "°F";
+      forecastMin2.textContent = "Min temp: " + data.list[0].main.temp_min + "°F";
       forecastDisplay2.append(forecastMin2);
-      forecastMax2.textContent = "Max temp: " + data.list[i].main.temp_max + "°F";
+      forecastMax2.textContent = "Max temp: " + data.list[0].main.temp_max + "°F";
       forecastDisplay2.append(forecastMax2);
       forecastAbout2.textContent = data.list[i].weather[0].description;
       forecastDisplay2.append(forecastAbout2);
 
+      forecastIcon3.innerHTML = "<img src=http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png width='90'>";
+      forecastDisplay3.append(forecastIcon3);
       forecastDate3.textContent = data.list[2].dt_txt;
       forecastDisplay3Date.append(forecastDate3);
-      forecastMin3.textContent = "Min temp: " + data.list[i].main.temp_min + "°F";
+      forecastMin3.textContent = "Min temp: " + data.list[0].main.temp_min + "°F";
       forecastDisplay3.append(forecastMin3);
-      forecastMax3.textContent = "Max temp: " + data.list[i].main.temp_max + "°F";
+      forecastMax3.textContent = "Max temp: " + data.list[0].main.temp_max + "°F";
       forecastDisplay3.append(forecastMax3);
       forecastAbout3.textContent = data.list[i].weather[0].description;
       forecastDisplay3.append(forecastAbout3);
 
+      forecastIcon4.innerHTML = "<img src=http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png width='90'>";
+      forecastDisplay4.append(forecastIcon4);
       forecastDate4.textContent = data.list[3].dt_txt;
       forecastDisplay4Date.append(forecastDate4);
-      forecastMin4.textContent = "Min temp: " + data.list[i].main.temp_min + "°F";
+      forecastMin4.textContent = "Min temp: " + data.list[0].main.temp_min + "°F";
       forecastDisplay4.append(forecastMin4);
-      forecastMax4.textContent = "Max temp: " + data.list[i].main.temp_max + "°F";
+      forecastMax4.textContent = "Max temp: " + data.list[0].main.temp_max + "°F";
       forecastDisplay4.append(forecastMax4);
       forecastAbout4.textContent = data.list[i].weather[0].description;
       forecastDisplay4.append(forecastAbout4);
 
+      forecastIcon5.innerHTML = "<img src=http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png width='90'>";
+      forecastDisplay5.append(forecastIcon5);
       forecastDate5.textContent = data.list[4].dt_txt;
       forecastDisplay5Date.append(forecastDate5);
-      forecastMin5.textContent = "Min temp: " + data.list[i].main.temp_min + "°F";
+      forecastMin5.textContent = "Min temp: " + data.list[0].main.temp_min + "°F";
       forecastDisplay5.append(forecastMin5);
-      forecastMax5.textContent = "Max temp: " + data.list[i].main.temp_max + "°F";
+      forecastMax5.textContent = "Max temp: " + data.list[0].main.temp_max + "°F";
       forecastDisplay5.append(forecastMax5);
       forecastAbout5.textContent = data.list[i].weather[0].description;
       forecastDisplay5.append(forecastAbout5);
