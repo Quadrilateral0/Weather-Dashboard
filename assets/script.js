@@ -4,14 +4,48 @@ var text = document.getElementById("search-bar");
 var searchButton = document.getElementById("search-button");
 var searchDisplay = document.getElementById("search-append");
 var dataDisplay = document.querySelector("#data-display");
-var forecastDisplay = document.querySelector("#forecast-display");
+var error = document.querySelector("#error");
+
+var forecastDisplay1 = document.querySelector("#forecast-display1");
+var forecastDisplay1Date = document.querySelector("#forecast-display1-date");
+var forecastDate1 = document.createElement("p");
+var forecastMin1 = document.createElement("p");
+var forecastMax1 = document.createElement("p");
+var forecastAbout1 = document.createElement("p");
+
+var forecastDisplay2 = document.querySelector("#forecast-display2");
+var forecastDisplay2Date = document.querySelector("#forecast-display2-date");
+var forecastDate2 = document.createElement("p");
+var forecastMin2 = document.createElement("p");
+var forecastMax2 = document.createElement("p");
+var forecastAbout2 = document.createElement("p");
+
+var forecastDisplay3 = document.querySelector("#forecast-display3");
+var forecastDisplay3Date = document.querySelector("#forecast-display3-date");
+var forecastDate3 = document.createElement("p");
+var forecastMin3 = document.createElement("p");
+var forecastMax3 = document.createElement("p");
+var forecastAbout3 = document.createElement("p");
+
+var forecastDisplay4 = document.querySelector("#forecast-display4");
+var forecastDisplay4Date = document.querySelector("#forecast-display4-date");
+var forecastDate4 = document.createElement("p");
+var forecastMin4 = document.createElement("p");
+var forecastMax4 = document.createElement("p");
+var forecastAbout4 = document.createElement("p");
+
+var forecastDisplay5 = document.querySelector("#forecast-display5");
+var forecastDisplay5Date = document.querySelector("#forecast-display5-date");
+var forecastDate5 = document.createElement("p");
+var forecastMin5 = document.createElement("p");
+var forecastMax5 = document.createElement("p");
+var forecastAbout5 = document.createElement("p");
+
 var searchLocation = document.createElement("h3");
 var windLocation = document.createElement("p");
 var tempLocation = document.createElement("p");
 var humLocation = document.createElement("p");
 var feelsLocation = document.createElement("p");
-var lat = "";
-var lon = "";
 var searchItem = [];
 
 //Renders today's weather data according to search query
@@ -36,26 +70,26 @@ function getApi() {
       humLocation.textContent = "Current humidity: " + data.main.humidity + "%";
       feelsLocation.textContent = "Current temperature feels like: " + data.main.feels_like + "°F";
 
-      lat = data.coord.lat;
-        saveLat();
-      lon = data.coord.lon;
-        saveLon();
-
       dataDisplay.append(searchLocation);
       dataDisplay.append(tempLocation);
       dataDisplay.append(feelsLocation);
       dataDisplay.append(windLocation);
       dataDisplay.append(humLocation);
+
+      var lat = data.coord.lat;
+      var lon = data.coord.lon;
+
+      getForecastApi(data.coord.lat, data.coord.lon);
     })
 };
 
-function getForecastApi() {
+function getForecastApi(lat, lon) {
   var queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + APIKey;
-  //var outcome = {};
+  var outcome = {};
   fetch(queryURL2)
     .then(function (response) {
       if (200 !== response.status) {
-        forecastDisplay.append(
+        error.append(
           "There was a problem with your query. Status Code: " + response.status
         );
         return;
@@ -63,33 +97,70 @@ function getForecastApi() {
       return response.json();
     })
 
-    //.then(function (data) {
-    //  console.log(data);
-    //  outcome.forecastResults = [];
-    //  for (i = 0; i < 5; i++) {
-    //    var forecast = {};
-    //    forecast.date = data[i].dt_txt;
-    //    forecast.minTemp = data[i].main.temp_min;
-    //    forecast.maxTemp = data[i].main.temp_max;
-    //    forecast.img = data[i].weather[0].icon;
-    //    forecast.desc = data[i].weather[0].description;
-    //    outcome.forecastResults.push(forecast);
-    //  }
-    //  console.log(outcome.forecastResults);
-    //});
+    .then(function (data) {
+      console.log(data);
+      outcome.forecastResults = [];
+      for (i = 0; i < 5; i++) {
+        var forecast = {};
+        forecast.icon = data.list[i].weather[0].icon;
+        forecast.date = data.list[i].dt_txt;
+        forecast.min = data.list[i].main.temp_min;
+        forecast.max = data.list[i].main.temp_max;
+        forecast.about = data.list[i].weather[0].description;
+        outcome.forecastResults.push(forecast);
+      }
+      console.log(outcome.forecastResults);
+      
+      forecastDate1.textContent = data.list[0].dt_txt;
+      forecastDisplay1Date.append(forecastDate1);
+      forecastMin1.textContent = "Min temp: " + data.list[i].main.temp_min + "°F";
+      forecastDisplay1.append(forecastMin1);
+      forecastMax1.textContent = "Max temp: " + data.list[i].main.temp_max + "°F";
+      forecastDisplay1.append(forecastMax1);
+      forecastAbout1.textContent = data.list[i].weather[0].description;
+      forecastDisplay1.append(forecastAbout1);
+
+      forecastDate2.textContent = data.list[1].dt_txt;
+      forecastDisplay2Date.append(forecastDate2);
+      forecastMin2.textContent = "Min temp: " + data.list[i].main.temp_min + "°F";
+      forecastDisplay2.append(forecastMin2);
+      forecastMax2.textContent = "Max temp: " + data.list[i].main.temp_max + "°F";
+      forecastDisplay2.append(forecastMax2);
+      forecastAbout2.textContent = data.list[i].weather[0].description;
+      forecastDisplay2.append(forecastAbout2);
+
+      forecastDate3.textContent = data.list[2].dt_txt;
+      forecastDisplay3Date.append(forecastDate3);
+      forecastMin3.textContent = "Min temp: " + data.list[i].main.temp_min + "°F";
+      forecastDisplay3.append(forecastMin3);
+      forecastMax3.textContent = "Max temp: " + data.list[i].main.temp_max + "°F";
+      forecastDisplay3.append(forecastMax3);
+      forecastAbout3.textContent = data.list[i].weather[0].description;
+      forecastDisplay3.append(forecastAbout3);
+
+      forecastDate4.textContent = data.list[3].dt_txt;
+      forecastDisplay4Date.append(forecastDate4);
+      forecastMin4.textContent = "Min temp: " + data.list[i].main.temp_min + "°F";
+      forecastDisplay4.append(forecastMin4);
+      forecastMax4.textContent = "Max temp: " + data.list[i].main.temp_max + "°F";
+      forecastDisplay4.append(forecastMax4);
+      forecastAbout4.textContent = data.list[i].weather[0].description;
+      forecastDisplay4.append(forecastAbout4);
+
+      forecastDate5.textContent = data.list[4].dt_txt;
+      forecastDisplay5Date.append(forecastDate5);
+      forecastMin5.textContent = "Min temp: " + data.list[i].main.temp_min + "°F";
+      forecastDisplay5.append(forecastMin5);
+      forecastMax5.textContent = "Max temp: " + data.list[i].main.temp_max + "°F";
+      forecastDisplay5.append(forecastMax5);
+      forecastAbout5.textContent = data.list[i].weather[0].description;
+      forecastDisplay5.append(forecastAbout5);
+    });
 };
 
 //Store search queries in the searchItem array in local storage
 function saveSearch() {
   localStorage.setItem("searchItem", JSON.stringify(searchItem));
-};
-
-//Store latitude & longitude in local storage
-function saveLat() {
-  localStorage.setItem("lat", JSON.stringify(lat));
-};
-function saveLon() {
-  localStorage.setItem("lon", JSON.stringify(lon));
 };
 
 //Append search query to page
@@ -126,7 +197,7 @@ searchButton.addEventListener("click", function (event) {
   saveSearch();
   renderSearch();
   getApi();
-  getForecastApi();
+  //getForecastApi();
 
   text.value = "";
 });
