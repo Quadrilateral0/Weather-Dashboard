@@ -10,9 +10,9 @@ For this project, I created a weather dashboard application. This application de
 - [License](#license)
 
 ## Usage
-Visit my [Weather Dashboard here](https://quadrilateral0.github.io/Weather-Dashboard/). The following image shows the web application's appearance and functionality:
+Visit my [Weather Dashboard here](https://quadrilateral0.github.io/Weather-Dashboard/). The following animation shows the web application's appearance and functionality:
 
-![Screenshot of Completed Website](assets/images/weather-dashboard-screenshot.png)
+![Screenshot of Completed Website](assets/images/weather-dashboard-screenshot.gif)
 
 ## User Story
 
