@@ -13,6 +13,7 @@ var forecastMin1 = document.createElement("p");
 var forecastMax1 = document.createElement("p");
 var forecastAbout1 = document.createElement("p");
 var forecastIcon1 = document.createElement("pre");
+var forecastHum1 = document.createElement("p");
 
 var forecastDisplay2 = document.querySelector("#forecast-display2");
 var forecastDisplay2Date = document.querySelector("#forecast-display2-date");
@@ -21,6 +22,7 @@ var forecastMin2 = document.createElement("p");
 var forecastMax2 = document.createElement("p");
 var forecastAbout2 = document.createElement("p");
 var forecastIcon2 = document.createElement("pre");
+var forecastHum2 = document.createElement("p");
 
 var forecastDisplay3 = document.querySelector("#forecast-display3");
 var forecastDisplay3Date = document.querySelector("#forecast-display3-date");
@@ -29,6 +31,7 @@ var forecastMin3 = document.createElement("p");
 var forecastMax3 = document.createElement("p");
 var forecastAbout3 = document.createElement("p");
 var forecastIcon3 = document.createElement("pre");
+var forecastHum3 = document.createElement("p");
 
 var forecastDisplay4 = document.querySelector("#forecast-display4");
 var forecastDisplay4Date = document.querySelector("#forecast-display4-date");
@@ -37,6 +40,7 @@ var forecastMin4 = document.createElement("p");
 var forecastMax4 = document.createElement("p");
 var forecastAbout4 = document.createElement("p");
 var forecastIcon4 = document.createElement("pre");
+var forecastHum4 = document.createElement("p");
 
 var forecastDisplay5 = document.querySelector("#forecast-display5");
 var forecastDisplay5Date = document.querySelector("#forecast-display5-date");
@@ -45,6 +49,7 @@ var forecastMin5 = document.createElement("p");
 var forecastMax5 = document.createElement("p");
 var forecastAbout5 = document.createElement("p");
 var forecastIcon5 = document.createElement("pre");
+var forecastHum5 = document.createElement("p");
 
 var searchLocation = document.createElement("h3");
 var windLocation = document.createElement("p");
@@ -91,6 +96,7 @@ function getApi() {
     })
 };
 
+//Render's five day forecast according to search query
 function getForecastApi(lat, lon) {
   var queryURL2 = "https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=" + APIKey;
   var outcome = {};
@@ -114,11 +120,10 @@ function getForecastApi(lat, lon) {
         forecast.date = data.list[i].dt_txt;
         forecast.min = data.list[i].main.temp_min;
         forecast.max = data.list[i].main.temp_max;
+        forecast.hum = data.list[i].main.humidity;
         forecast.about = data.list[i].weather[0].description;
         outcome.forecastResults.push(forecast);
       }
-      console.log(outcome.forecastResults);
-      console.log(data.list[0].main.temp_max,data.list[0].main.temp_min);
       //http://openweathermap.org/img/w/10d.png
       
       forecastIcon1.innerHTML = "<img src=http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png width='90'>";
@@ -129,6 +134,8 @@ function getForecastApi(lat, lon) {
       forecastDisplay1.append(forecastMin1);
       forecastMax1.textContent = "Max temp: " + data.list[0].main.temp_max + "°F";
       forecastDisplay1.append(forecastMax1);
+      forecastHum1.textContent = data.list[i].main.humidity + "% humidity";
+      forecastDisplay1.append(forecastHum1);
       forecastAbout1.textContent = data.list[i].weather[0].description;
       forecastDisplay1.append(forecastAbout1);
 
@@ -140,6 +147,8 @@ function getForecastApi(lat, lon) {
       forecastDisplay2.append(forecastMin2);
       forecastMax2.textContent = "Max temp: " + data.list[0].main.temp_max + "°F";
       forecastDisplay2.append(forecastMax2);
+      forecastHum2.textContent = data.list[i].main.humidity + "% humidity";
+      forecastDisplay2.append(forecastHum2);
       forecastAbout2.textContent = data.list[i].weather[0].description;
       forecastDisplay2.append(forecastAbout2);
 
@@ -151,6 +160,8 @@ function getForecastApi(lat, lon) {
       forecastDisplay3.append(forecastMin3);
       forecastMax3.textContent = "Max temp: " + data.list[0].main.temp_max + "°F";
       forecastDisplay3.append(forecastMax3);
+      forecastHum3.textContent = data.list[i].main.humidity + "% humidity";
+      forecastDisplay3.append(forecastHum3);
       forecastAbout3.textContent = data.list[i].weather[0].description;
       forecastDisplay3.append(forecastAbout3);
 
@@ -162,6 +173,8 @@ function getForecastApi(lat, lon) {
       forecastDisplay4.append(forecastMin4);
       forecastMax4.textContent = "Max temp: " + data.list[0].main.temp_max + "°F";
       forecastDisplay4.append(forecastMax4);
+      forecastHum4.textContent = data.list[i].main.humidity + "% humidity";
+      forecastDisplay4.append(forecastHum4);
       forecastAbout4.textContent = data.list[i].weather[0].description;
       forecastDisplay4.append(forecastAbout4);
 
@@ -173,6 +186,8 @@ function getForecastApi(lat, lon) {
       forecastDisplay5.append(forecastMin5);
       forecastMax5.textContent = "Max temp: " + data.list[0].main.temp_max + "°F";
       forecastDisplay5.append(forecastMax5);
+      forecastHum5.textContent = data.list[i].main.humidity + "% humidity";
+      forecastDisplay5.append(forecastHum5);
       forecastAbout5.textContent = data.list[i].weather[0].description;
       forecastDisplay5.append(forecastAbout5);
     });
@@ -187,13 +202,13 @@ function saveSearch() {
 function renderSearch() {
   searchDisplay.innerHTML = "";
   for (var i = 0; i < searchItem.length; i++) {
-    var searchArray = searchItem[i] + "  ";
+    var searchArray = searchItem[i];
     var li = document.createElement("li");
-    var remove = document.createElement("button");
+    var addButton = document.createElement("button");
 
-    remove.textContent = searchArray;
+    addButton.textContent = searchArray;
     li.setAttribute("search-index", i);
-    searchDisplay.appendChild(remove);
+    searchDisplay.appendChild(addButton);
   }
 };
 
@@ -217,21 +232,21 @@ searchButton.addEventListener("click", function (event) {
   saveSearch();
   renderSearch();
   getApi();
-  //getForecastApi();
 
   text.value = "";
 });
 
-// Add click remove event to saved search history
+// Add click event to saved search history
 searchDisplay.addEventListener("click", function (event) {
   var element = event.target;
 
   if (element.matches("button") === true) {
-    var index = element.parentElement.getAttribute("search-index");
-    searchItem.splice(index, 1);
+    var buttonText = element.textContent;
+    text.value = buttonText;
 
     saveSearch();
     renderSearch();
+    getApi();
   }
 });
 
